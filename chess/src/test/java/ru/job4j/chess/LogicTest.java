@@ -12,43 +12,28 @@ import static org.junit.Assert.assertThat;
 
 public class LogicTest {
 
-    @Test
+    @Test(expected = FigureNotFoundException.class)
     public void moveFigureNotFound()
             throws FigureNotFoundException, OccupiedCellException, ImpossibleMoveException {
         Logic logic = new Logic();
         logic.add(new BishopBlack(Cell.C1));
-        try {
-            logic.move(Cell.C2, Cell.H6);
-            Assert.fail("Expected FigureNotFoundException");
-        } catch (FigureNotFoundException exception) {
-            Assert.assertNotEquals("", exception.getMessage());
-        }
+        logic.move(Cell.C2, Cell.H6);
     }
 
-    @Test
+    @Test(expected = OccupiedCellException.class)
     public void moveOccupiedCellException()
             throws FigureNotFoundException, OccupiedCellException, ImpossibleMoveException {
         Logic logic = new Logic();
         logic.add(new BishopBlack(Cell.C1));
         logic.add(new BishopBlack(Cell.G5));
-        try {
-            logic.move(Cell.C1, Cell.H6);
-            Assert.fail("Expected OccupiedCellException");
-        } catch (OccupiedCellException exception) {
-            Assert.assertNotEquals("", exception.getMessage());
-        }
+        logic.move(Cell.C1, Cell.H6);
     }
 
-    @Test
+    @Test(expected = ImpossibleMoveException.class)
     public void moveImpossibleMoveException()
             throws FigureNotFoundException, OccupiedCellException, ImpossibleMoveException {
         Logic logic = new Logic();
         logic.add(new BishopBlack(Cell.C1));
-        try {
-            logic.move(Cell.C1, Cell.G6);
-            Assert.fail("Expected ImpossibleMoveException");
-        } catch (ImpossibleMoveException exception) {
-            Assert.assertNotEquals("", exception.getMessage());
-        }
+        logic.move(Cell.C1, Cell.G6);
     }
 }

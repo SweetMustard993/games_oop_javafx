@@ -34,15 +34,10 @@ public class BishopBlackTest {
         assertThat(rsl, is(new Cell[]{Cell.D2, Cell.E3, Cell.F4, Cell.G5}));
     }
 
-    @Test
+    @Test(expected = ImpossibleMoveException.class)
     public void wayIncorrect() throws ImpossibleMoveException {
         Cell dest = Cell.G6;
         Figure bishopBlack = new BishopBlack(Cell.C1);
-        try {
-            Cell[] rsl = bishopBlack.way(dest);
-            Assert.fail("Expected ImpossibleMoveException");
-        } catch (ImpossibleMoveException exception) {
-            Assert.assertNotEquals("", exception.getMessage());
-        }
+        Cell[] rsl = bishopBlack.way(dest);
     }
 }
